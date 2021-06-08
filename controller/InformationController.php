@@ -17,7 +17,7 @@
             $this->requestMethod = $requestMethod;
             $this->id = $id;
 
-            $this->informationRepository = new InformationRepository($db);
+            $this->informationRepository = new \InformationRepository($db);
         }
 
         public function processRequest(){
