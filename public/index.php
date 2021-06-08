@@ -10,21 +10,20 @@
     include_once '../config/database.php';
 
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    echo json_encode($uri);
     $uri = explode('/',$uri);
 
+    echo json_encode($uri);
     if($uri[1] !== 'TestApi')
     {
-        #echo json_encode($uri);
         header("HTTP/1.1 404 Not Found");
         exit();
     }
 
-    $id = null;
     if(isset($uri[2])){
         $id = (int) $uri[2];
     }
-    
-    $requestMethod = $_SERVER["REQUEST_METHOD"];
+    $requestMethod = $_SERVER['REQUEST_METHOD'];
     $db = new Database();
     $db = $db->getConnection();
 
