@@ -9,6 +9,7 @@ class Database{
     public function getConnection(){
         try{
             $connection = new PDO("mysql:host=" . $this->host . ";dbname=" . $this->database, $this->username, $this->password);
+            $connection->setAttribute(PDO::ATTR_EMULATE_PREPARES,false);
             $connection->exec("set names utf8");
             return $connection;
         }
