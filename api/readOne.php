@@ -7,7 +7,7 @@
 
     include_once '../config/database.php';
     include_once '../model/information.php';
-
+    echo json_encode( $_SERVER['REQUEST_METHOD']);
     $database = new Database();
     $db = $database->getConnection();
     $informations = new InformationRepository($db);

@@ -4,7 +4,6 @@
     require_once "../model/information.php";
     #require '../config/database.php';
 
-    #https://developer.okta.com/blog/2019/03/08/simple-rest-api-php
     class InformationController{
         private $db;
         private $requestMethod;
@@ -65,6 +64,7 @@
                     );
                     array_push($dataArray["body"], $e);
                 }
+                http_response_code(200);
                 echo json_encode($dataArray);
             }
             else{
@@ -76,7 +76,7 @@
         private function one($id)
         {
             if(is_numeric($id)){
-                $info = $informations->getSingleInformation($id);
+                $info = $this->informationRepository->getSingleInformation($id);
                 if($info == null)
                 {
                     http_response_code(404);
@@ -89,6 +89,7 @@
                         "name" => $info->name,
                         "creation" => $info->creation,
                     );
+                    http_response_code(200);
                     echo json_encode($dataArray);
                 }
     
