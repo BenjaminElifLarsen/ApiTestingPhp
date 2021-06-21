@@ -35,7 +35,7 @@
                     break;
 
                 case 'PUT':
-                    $this->update();
+                    $this->update($this->id);
                     break;
 
                 case 'DELETE':
@@ -129,10 +129,43 @@
             }
         }
 
-        private function update()
+        private function update($id)
         {
-
+            echo $id;
+            $input = file_get_contents("php://input");
+            echo var_dump($input);
+            $input = (array) json_decode($input);
+            echo var_dump($input);
+            if($this->validdateData($input)){
+                $name = $input["name"];
+                $creationTime = $input["creationTime"];
+                echo $name;
+                echo $creationTime;
+                $result = $this->informationRepository->UpdateInformation($name, $id, $creationTime);
+                if($result){
+                    http_response_code(404);
+                    echo json_encode(array("message" => "successed"));
+                }
+                else{
+                    http_response_code(404);
+                    echo json_encode(array("message" => "failed"));
+                }
+            }else{
+                echo "nope";
+            }
         }
+
+        private function validdateData($data)
+        {
+            if(!isset($data["name"])){
+                return false;
+            }
+            if(!isset($data["creationTime"])){
+                return false;
+            }
+            return true;
+        }
+
     }
 
 

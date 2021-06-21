@@ -19,6 +19,7 @@
         header("HTTP/1.1 404 Not Found");
         exit();
     }
+    //echo $_GET["id"]; //gets the value of the query with the key "id".
     if(isset($uri[4])){ //needs to be four if contacted directly.
         $id = (int) $uri[4];
     }

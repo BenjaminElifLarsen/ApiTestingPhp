@@ -4,7 +4,7 @@ interface IModelRepository{
     public function getInformation();
     public function getSingleInformation($item);
     public function CreateInformation($name, $creation);
-    public function UpdateInformation($name, $id);
+    public function UpdateInformation($name, $id, $creation);
     public function DeleteInformation($id);
 }
 
@@ -62,15 +62,17 @@ class InformationRepository implements IModelRepository{
         return false;
     }
 
-    public function UpdateInformation($name, $id){ //need to handle if trying to update non-existing entities, right now it indicates a success
+    public function UpdateInformation($name, $id, $creation){ //need to handle if trying to update non-existing entities, right now it indicates a success
         if($name == null || $id == null)
             return false;
-        $sqlQuery = "UPDATE " . $this->table . " SET Name = :name WHERE Id = :id";
+        $sqlQuery = "UPDATE " . $this->table . " SET Name = :name, Creation = :creation WHERE Id = :id";
         $statement = $this->connection->prepare($sqlQuery);
         $clearName = htmlspecialchars(strip_tags($name));
         $clearId = htmlspecialchars(strip_tags($id));
+        $clearCreation = htmlspecialchars(strip_tags($creation));
         $statement->bindParam(":name", $clearName);
         $statement->bindParam(":id", $clearId);
+        $statement->bindParam(":creation", $clearCreation);
         if($statement->execute()){
             if($statement->rowCount() > 0)
                 return true;
