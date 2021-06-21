@@ -35,7 +35,7 @@
                     break;
 
                 case 'PUT':
-                    
+                    $this->update();
                     break;
 
                 case 'DELETE':
@@ -101,6 +101,18 @@
 
         private function add()
         {
+            if(!isset($_POST["name"]) or !isset($_POST["creationTime"]))
+            {
+                http_response_code(404);
+                echo json_encode(array("message" => "post variables not set."));
+                exit;
+            }
+            if(empty($_POST["name"]) || empty($_POST["creationTime"]))
+            {
+                http_response_code(404);
+                echo json_encode(array("message" => "one or more variables are empty."));
+                exit;
+            }
             $name = htmlspecialchars($_POST["name"]);
             $creationTime = htmlspecialchars($_POST["creationTime"]);
             echo $name . $creationTime;
@@ -115,6 +127,11 @@
                 http_response_code(404);
                 echo json_encode(array("message" => "failed"));
             }
+        }
+
+        private function update()
+        {
+
         }
     }
 
