@@ -117,6 +117,7 @@
             }
             $name = htmlspecialchars($_POST["name"]);
             $creationTime = htmlspecialchars($_POST["creationTime"]);
+            $creationTime = date("Y-m-d", strtotime($creationTime));
             $result = $this->informationRepository->CreateInformation($name, $creationTime);
             if($result)
             {
@@ -137,6 +138,7 @@
             if($this->validdateData($input)){
                 $name = $input["name"];
                 $creationTime = $input["creationTime"];
+                $creationTime = date("Y-m-d", strtotime($creationTime));
                 $result = $this->informationRepository->UpdateInformation($name, $id, $creationTime);
                 if($result){
                     http_response_code(404);
