@@ -10,18 +10,23 @@
         private $id;
         private $informationRepository;
 
-        public function __construct($db, $requestMethod, $id)
+        public function __construct($db, $requestMethod/*, $id*/)
         {
             $this->db = $db;
             $this->requestMethod = $requestMethod;
-            $this->id = $id;
+            //$this->id = $id;
 
             $this->informationRepository = new \InformationRepository($db);
         }
 
+        public function setId($id)
+        {
+            $this->id = $id;
+        }
+
         public function processRequest()
         {
-            echo json_encode($this->requestMethod);
+            //echo json_encode($this->requestMethod);
             switch($this->requestMethod){
                 case 'GET':
                     if($this->id){
@@ -115,7 +120,7 @@
             }
             $name = htmlspecialchars($_POST["name"]);
             $creationTime = htmlspecialchars($_POST["creationTime"]);
-            echo $name . $creationTime;
+            //echo $name . $creationTime;
             $result = $this->informationRepository->CreateInformation($name, $creationTime);
             if($result)
             {
@@ -131,16 +136,16 @@
 
         private function update($id)
         {
-            echo $id;
+            //echo $id;
             $input = file_get_contents("php://input");
-            echo var_dump($input);
+            //echo var_dump($input);
             $input = (array) json_decode($input);
-            echo var_dump($input);
+            //echo var_dump($input);
             if($this->validdateData($input)){
                 $name = $input["name"];
                 $creationTime = $input["creationTime"];
-                echo $name;
-                echo $creationTime;
+                //echo $name;
+                //echo $creationTime;
                 $result = $this->informationRepository->UpdateInformation($name, $id, $creationTime);
                 if($result){
                     http_response_code(404);
@@ -157,7 +162,7 @@
 
         private function delete($id)
         {
-            echo $id;
+            //echo $id;
             $result = $this->informationRepository->DeleteInformation($id);
             if($result){
                 http_response_code(404);
