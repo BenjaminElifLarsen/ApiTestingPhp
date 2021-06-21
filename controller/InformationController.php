@@ -39,7 +39,7 @@
                     break;
 
                 case 'DELETE':
-                    
+                    $this->delete($this->id);
                     break;
             }
         }
@@ -151,7 +151,21 @@
                     echo json_encode(array("message" => "failed"));
                 }
             }else{
-                echo "nope";
+                echo "invalid data type";
+            }
+        }
+
+        private function delete($id)
+        {
+            echo $id;
+            $result = $this->informationRepository->DeleteInformation($id);
+            if($result){
+                http_response_code(404);
+                echo json_encode(array("message" => "successed"));
+            }
+            else{
+                http_response_code(404);
+                echo json_encode(array("message" => "failed"));
             }
         }
 
