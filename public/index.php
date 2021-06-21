@@ -19,8 +19,8 @@
         header("HTTP/1.1 404 Not Found");
         exit();
     }
-    if(isset($uri[2])){ //needs to be four if contacted directly.
-        $id = (int) $uri[2];
+    if(isset($uri[4])){ //needs to be four if contacted directly.
+        $id = (int) $uri[4];
     }
     $requestMethod = $_SERVER['REQUEST_METHOD'];
     $db = new Database();
