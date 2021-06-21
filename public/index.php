@@ -10,10 +10,7 @@
     include_once '../config/database.php';
 
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-    //echo json_encode($uri);
     $uri = explode('/',$uri);
-
-    //echo json_encode($uri);
     if($uri[1] !== 'TestApi')
     {
         header("HTTP/1.1 404 Not Found");
@@ -24,7 +21,7 @@
     $db = new Database();
     $db = $db->getConnection();
 
-    $controller = new Controller\InformationController($db, $requestMethod/*, $id*/);
+    $controller = new Controller\InformationController($db, $requestMethod);
     //echo $_GET["id"]; //gets the value of the query with the key "id".
     if(isset($uri[4])){ //needs to be four if contacted directly.
         $id = (int) $uri[4];
