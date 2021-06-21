@@ -44,6 +44,7 @@
                     $this->delete($this->id);
                     break;
             }
+            exit();
         }
 
         private function all()
