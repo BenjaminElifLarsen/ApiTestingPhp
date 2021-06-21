@@ -8,7 +8,6 @@
         private $db;
         private $requestMethod;
         private $id;
-
         private $informationRepository;
 
         public function __construct($db, $requestMethod, $id)
@@ -32,7 +31,7 @@
                     }
                     break;
                 case 'POST':
-                    
+                    $this->add();
                     break;
 
                 case 'PUT':
@@ -97,6 +96,24 @@
             else{
                 http_response_code(404);
                 echo json_encode(array("message" => "Invalid id"));
+            }
+        }
+
+        private function add()
+        {
+            $name = htmlspecialchars($_POST["name"]);
+            $creationTime = htmlspecialchars($_POST["creationTime"]);
+            echo $name . $creationTime;
+            $result = $this->informationRepository->CreateInformation($name, $creationTime);
+            if($result)
+            {
+                http_response_code(200);
+                echo json_encode(array("message" => "successed"));
+            }
+            else
+            {
+                http_response_code(404);
+                echo json_encode(array("message" => "failed"));
             }
         }
     }
