@@ -9,3 +9,8 @@ Folders:
     Contains data regarding the data model of the single table of the database and the repository and interface for accessing data in the context.
   Api:
     Contains data paths that permits adding, deleting, updating, and viewing data in the database.
+
+
+If given the path of a folder without any index.php file, it will return an overview of all folders and php-files. Might have to be fixed on the server itself. 
+
+The uri is case-sensitive, might be a server thing.
