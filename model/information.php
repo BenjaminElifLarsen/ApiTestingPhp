@@ -2,7 +2,7 @@
 
 interface IModelRepository{
     public function getInformation();
-    public function getSingleInformation($item);
+    public function getSingleInformation($item) : Information;
     public function CreateInformation($name, $creation);
     public function UpdateInformation($name, $id, $creation);
     public function DeleteInformation($id);
@@ -25,7 +25,7 @@ class InformationRepository implements IModelRepository{
     } 
 
 
-    public function getSingleInformation($item) { //need to handle ids that does not exist in the database
+    public function getSingleInformation($item) : Information { //need to handle ids that does not exist in the database
         $sqlQuery = "Select Id, Name, Creation FROM " . $this->table . " Where Id = :id LIMIT 0,1;"; #most likely weak to sql injection.
         $statement = $this->connection->prepare($sqlQuery); //the call to this function checks if $item is numerical or not.
         $statement->bindParam(':id', $item);
