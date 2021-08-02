@@ -13,4 +13,4 @@ Folders:
 
 If given the path of a folder without any index.php file, it will return an overview of all folders and php-files. Might have to be fixed on the server itself. 
 
-The uri is case-sensitive, might be a server thing.
+The uri is case-sensitive, might be a server thing. Actually, it is because of some code in the index php file, which does not ignore case-sensitivity.
